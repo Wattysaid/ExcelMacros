@@ -1,0 +1,37 @@
+# Copy and paste below code as a module into the excel sheet
+
+Sub splitCellContent()
+    Dim rng As Range
+    Dim cell As Range
+    Dim txt As String
+    Dim txtArray() As String
+    Dim i As Long
+    Dim newRows As Long
+    Dim dataRow As Range
+    
+    Set rng = Application.Selection
+    Application.ScreenUpdating = False
+    
+    For Each cell In rng
+        If InStr(cell.Value, vbLf) > 0 Then
+            txt = cell.Value
+            txtArray = Split(txt, vbLf)
+            newRows = UBound(txtArray)
+            If newRows > 0 Then
+                cell.Value = txtArray(0)
+                cell.Offset(1, 0).Resize(newRows, 1).EntireRow.Insert
+                
+                ' Copy values from the original row
+                Set dataRow = cell.EntireRow
+                dataRow.Copy cell.Offset(1, 0).Resize(newRows, 1).EntireRow
+                
+                ' Write the remaining lines of text
+                For i = 1 To newRows
+                    cell.Offset(i, 0).Value = txtArray(i)
+                Next i
+            End If
+        End If
+    Next cell
+    
+    Application.ScreenUpdating = True
+End Sub
