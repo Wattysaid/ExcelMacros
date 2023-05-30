@@ -1,0 +1,46 @@
+Sub CreateContentTab()
+    Dim ws As Worksheet
+    Dim contentSheet As Worksheet
+    Dim i As Integer
+    
+    On Error Resume Next
+    Set contentSheet = ThisWorkbook.Sheets("Summary")
+    On Error GoTo 0
+    
+    If Not contentSheet Is Nothing Then
+        MsgBox "A sheet with the name 'Summary' already exists. Please rename or delete the existing 'Summary' sheet.", vbExclamation
+        Exit Sub
+    End If
+    
+    ' Create a new content sheet
+    Set contentSheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(1)) ' Add after the first sheet
+    contentSheet.Name = "Summary"
+    
+    ' Set up column headers
+    contentSheet.Range("A1").Value = "Sheet Name"
+    contentSheet.Range("B1").Value = "Link"
+    
+    ' Loop through each sheet in the workbook
+    i = 2 ' Start from row 2
+    For Each ws In ThisWorkbook.Sheets
+        If ws.Name <> contentSheet.Name Then
+            ' Add sheet name to column A
+            contentSheet.Range("A" & i).Value = ws.Name
+            
+            ' Add hyperlink to the sheet in column B
+            contentSheet.Hyperlinks.Add _
+                Anchor:=contentSheet.Range("B" & i), _
+                Address:="", _
+                SubAddress:="'" & ws.Name & "'!A1", _
+                TextToDisplay:="Go to "
+                                
+            i = i + 1 ' Move to the next row
+        End If
+    Next ws
+    
+    ' Auto-fit columns
+    contentSheet.Columns("A:B").AutoFit
+    
+    ' Select cell A1 on the content sheet
+    contentSheet.Range("A1").Select
+End Sub
