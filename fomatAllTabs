@@ -1,0 +1,53 @@
+# Copy and paste below code as a module into the excel sheet
+
+Sub FormatAllTabs()
+    Const FONT_NAME As String = "Calibri"
+    Const FONT_SIZE As Integer = 11
+    Const FONT_COLOR As Long = RGB(0, 0, 0)
+    
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    Application.EnableEvents = False
+    
+    On Error Resume Next ' Ignore errors and continue with the next sheet
+    
+    Dim ws As Worksheet
+    For Each ws In ThisWorkbook.Worksheets
+        With ws
+            Dim usedRange As Range
+            Set usedRange = .UsedRange
+            
+            ' Apply generic formatting rules to the used range
+            With usedRange
+                .Borders.ColorIndex = xlColorIndexNone
+                .Font.Name = FONT_NAME
+                .Font.Size = FONT_SIZE
+                .Font.Color = FONT_COLOR
+                .WrapText = True
+                .VerticalAlignment = xlTop
+                .HorizontalAlignment = xlLeft
+            End With
+            
+            ' Apply header formatting rules to the first row
+            If usedRange.Rows.Count >= 1 Then
+                Dim headerRange As Range
+                Set headerRange = usedRange.Rows(1)
+                
+                With headerRange
+                    .Font.Name = FONT_NAME
+                    .Font.Size = FONT_SIZE
+                    .Font.Bold = True
+                    .Font.Color = FONT_COLOR
+                End With
+            End If
+        End With
+    Next ws
+    
+    Application.Calculation = xlCalculationAutomatic
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
+    
+    On Error GoTo 0 ' Reset error handling
+    
+    MsgBox "Formatting complete!"
+End Sub
