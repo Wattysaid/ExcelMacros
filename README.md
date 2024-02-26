@@ -17,7 +17,7 @@ Anyone who's dabbling along 🤓.
 
 ## How to use ##
 
-1.Save your excel sheet as a macro enabled sheet
+1. Save your excel sheet as a macro enabled sheet
 2. Press ALT + F11 to open the Visual Basic for Applications (VBA) editor.
 3. In the menu bar, click Insert, then Module to create a new module.
 4. Copy and paste the relevant macro into the module window.
