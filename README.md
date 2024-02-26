@@ -27,13 +27,17 @@ Anyone who's dabbling along 🤓.
 
 1. Adjust the sheet name in the code if necessary.
 2. Close the VBA editor and return to Excel.
-3. Press ALT + F8, select ReplaceBRWithNewLine, and click Run.
+3. Press ALT + F8, select "MacroTitle", and click Run.
 
 ## 📚 Table of Contents
-<ul>
-    <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/Bulk_file_copy.py" target="_blank">BulkFileCopy</a></li>
-    <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/Chapter_to_new_docx.py" target="_blank">Chapter_to_doc</a></li>
-    <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/dependancy_checker.py" target="_blank">Dependency_checker</a></li>
-    <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/duplicated_checker.py" target="_blank">Duplicate_checker</a></li>
-    <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/Bulk_file_copy.py" target="_blank">Bulk Copy Files</a></li>
-</ul>
+
+## 📄 Updated Macros Descriptions:
+
+| File Name          | Description                                                                                                                                                                              |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| splitCellContent   | A VBA macro designed to split cell content across multiple rows in Excel. It identifies cells within a selected range that contain line breaks and distributes the content accordingly.   |
+| new_row            | This VBA macro allows users to replace specific strings in a selected column with new lines, facilitating content formatting within cells, especially useful for data presentation.       |
+| fomatAllTabs       | The description for this file was not provided. Please clarify if you need a specific operation or analysis performed on this content.                                                   |
+| contentSummary     | A macro that generates a new worksheet named "Summary" in Excel, listing all sheet names and providing hyperlinks for easy navigation, enhancing workbook organization and accessibility. |
+
+🔍 Explore the collection and discover tools to simplify your Excel tasks! 🌈✨
