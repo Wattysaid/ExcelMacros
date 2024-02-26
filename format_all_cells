@@ -1,0 +1,52 @@
+Sub FormatWorksheetTab()
+    Dim ws As Worksheet
+    Dim tabName As String
+    Dim formattingSummary As String
+    Dim userResponse As Integer
+
+    ' Prompt the user to type the tab name
+    tabName = InputBox("Please type the name of the tab you want to format:", "Tab Name")
+
+    ' Exit if no input is given
+    If tabName = "" Then Exit Sub
+    
+    ' Check if the sheet name exists
+    On Error Resume Next
+    Set ws = ThisWorkbook.Sheets(tabName)
+    If ws Is Nothing Then
+        MsgBox "Tab not found. Please try again."
+        Exit Sub
+    End If
+    On Error GoTo 0 ' Reset error handling
+    
+    ' Create a summary of the formatting
+    formattingSummary = "The following formatting will be applied to the tab '" & tabName & "':" & vbCrLf
+    formattingSummary = formattingSummary & "Font: Calibri" & vbCrLf
+    formattingSummary = formattingSummary & "Size: 11" & vbCrLf
+    formattingSummary = formattingSummary & "Style: Regular" & vbCrLf
+    formattingSummary = formattingSummary & "Alignment: Top, Left" & vbCrLf
+    formattingSummary = formattingSummary & "First Row: Bold" & vbCrLf
+    formattingSummary = formattingSummary & "Font Color: Black" & vbCrLf & vbCrLf
+    formattingSummary = formattingSummary & "Do you want to proceed?"
+    
+    ' Prompt the user with the formatting summary and capture response
+    userResponse = MsgBox(formattingSummary, vbOKCancel + vbQuestion, "Confirm Formatting")
+
+    ' Apply formatting if user selects 'OK'
+    If userResponse = vbOK Then
+        With ws.Cells
+            .Font.Name = "Calibri"
+            .Font.Size = 11
+            .Font.FontStyle = "Regular"
+            .HorizontalAlignment = xlLeft
+            .VerticalAlignment = xlTop
+            .Font.Color = RGB(0, 0, 0) ' Black
+        End With
+        With ws.Rows("1:1")
+            .Font.Bold = True
+        End With
+        MsgBox "The formatting has been applied.", vbInformation, "Formatting Applied"
+    Else
+        MsgBox "The formatting has not been applied.", vbInformation, "Formatting Cancelled"
+    End If
+End Sub
