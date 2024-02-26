@@ -1,0 +1,58 @@
+Sub ReplaceStringWithNewLine()
+    Dim ws As Worksheet
+    Dim targetColumn As Range
+    Dim searchString As String
+    Dim rng As Range
+    Dim cell As Range
+    Dim sheetNames As String
+    Dim selectedSheet As String
+    Dim columnHeader As String
+
+    ' Create a list of sheet names
+    For Each ws In ThisWorkbook.Sheets
+        sheetNames = sheetNames & ws.Name & ","
+    Next ws
+    sheetNames = Left(sheetNames, Len(sheetNames) - 1) ' Remove the trailing comma
+
+    ' Prompt the user to select a sheet
+    selectedSheet = InputBox("Please type the name of the sheet you want to use (" & sheetNames & "):", "Select Sheet")
+    If selectedSheet = "" Then Exit Sub ' Exit if no input is given
+    
+    ' Check if the sheet name exists
+    On Error Resume Next
+    Set ws = ThisWorkbook.Sheets(selectedSheet)
+    If ws Is Nothing Then
+        MsgBox "Sheet not found. Please try again."
+        Exit Sub
+    End If
+    On Error GoTo 0 ' Reset error handling
+
+    ' Prompt the user to select a column by header name
+    columnHeader = InputBox("Please enter the column header name you want to process:", "Select Column")
+    If columnHeader = "" Then Exit Sub ' Exit if no input is given
+    
+    ' Find the column with the given header
+    Set targetColumn = ws.Rows(1).Find(columnHeader, LookIn:=xlValues, LookAt:=xlWhole)
+    If targetColumn Is Nothing Then
+        MsgBox "Column header not found. Please try again."
+        Exit Sub
+    End If
+    
+    ' Prompt the user to enter the string to replace
+    searchString = InputBox("Please enter the string you want to replace with a new line (e.g., '<br>'):", "String to Replace")
+    If searchString = "" Then Exit Sub ' Exit if no input is given
+    
+    ' Define the range to operate on based on the user's column selection
+    Set rng = ws.Range(targetColumn.Address & ":" & targetColumn.Offset(ws.Cells(ws.Rows.Count, targetColumn.Column).End(xlUp).Row - 1, 0).Address)
+    
+    ' Perform the replacement
+    For Each cell In rng
+        If InStr(cell.Value, searchString) > 0 Then
+            cell.Value = Replace(cell.Value, searchString, Chr(10))
+            cell.WrapText = True
+        End If
+    Next cell
+    
+    MsgBox "Replacement complete."
+End Sub
+
