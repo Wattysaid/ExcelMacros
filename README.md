@@ -15,6 +15,20 @@ I am not a coder and these are by no means usable within a business environment.
 
 Anyone who's dabbling along 🤓.
 
+## How to use ##
+
+1.Save your excel sheet as a macro enabled sheet
+2. Press ALT + F11 to open the Visual Basic for Applications (VBA) editor.
+3. In the menu bar, click Insert, then Module to create a new module.
+4. Copy and paste the relevant macro into the module window.
+5. Press Save
+
+## How to call the script ##
+
+1. Adjust the sheet name in the code if necessary.
+2. Close the VBA editor and return to Excel.
+3. Press ALT + F8, select ReplaceBRWithNewLine, and click Run.
+
 ## 📚 Table of Contents
 <ul>
     <li><a href="https://github.com/Wattysaid/Python_scripts/blob/main/Bulk_file_copy.py" target="_blank">BulkFileCopy</a></li>
