@@ -1,0 +1,12 @@
+Sub RemoveExtraSpaces()
+    Dim cell As Range
+    
+    ' Loop through each cell in the selected range
+    For Each cell In Selection
+        ' Check if the cell contains a string value
+        If cell.HasFormula = False And IsEmpty(cell.Value) = False Then
+            ' Remove extra spaces
+            cell.Value = WorksheetFunction.Trim(cell.Value)
+        End If
+    Next cell
+End Sub
