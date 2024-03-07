@@ -1,0 +1,33 @@
+Sub CreateTableOfContents()
+    Dim ws As Worksheet
+    Dim wsTOC As Worksheet
+    Dim i As Integer
+    
+    ' Create a new worksheet for the Table of Contents
+    Set wsTOC = ThisWorkbook.Sheets.Add(Before:=ThisWorkbook.Sheets(1))
+    wsTOC.Name = "Table_of_Contents"
+    
+    ' Set the header for the Table of Contents
+    wsTOC.Cells(1, 1).Value = "Table of Contents"
+    wsTOC.Cells(1, 1).Font.Bold = True
+    
+    ' Initialize counter
+    i = 2
+    
+    ' Loop through each worksheet in the workbook
+    For Each ws In ThisWorkbook.Sheets
+        ' Skip the Table of Contents sheet
+        If ws.Name <> "Table_of_Contents" Then
+            ' Write the sheet name in the TOC
+            wsTOC.Cells(i, 1).Value = ws.Name
+            ' Create a hyperlink to the sheet
+            wsTOC.Hyperlinks.Add _
+                Anchor:=wsTOC.Cells(i, 1), _
+                Address:="", _
+                SubAddress:="'" & ws.Name & "'!A1", _
+                TextToDisplay:=ws.Name
+            ' Increment counter
+            i = i + 1
+        End If
+    Next ws
+End Sub
