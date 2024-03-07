@@ -1,0 +1,16 @@
+Sub ConvertFormulasToValues()
+    Dim cell As Range
+    Dim selectedRange As Range
+    
+    ' Set selectedRange to the user's selected range
+    Set selectedRange = Selection
+    
+    ' Loop through each cell in the selected range
+    For Each cell In selectedRange
+        ' Check if the cell has a formula
+        If cell.HasFormula Then
+            ' Replace the formula with its value
+            cell.Value = cell.Value
+        End If
+    Next cell
+End Sub
