@@ -1,0 +1,4 @@
+Sub AutoFitColumns()
+    ' Auto-fit all columns in the active worksheet
+    ActiveSheet.Columns.AutoFit
+End Sub
