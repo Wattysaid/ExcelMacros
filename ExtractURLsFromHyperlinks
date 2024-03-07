@@ -1,0 +1,19 @@
+Sub ExtractURLsFromHyperlinks()
+    Dim cell As Range
+    Dim selectedRange As Range
+    Dim hyperlinkAddress As String
+    
+    ' Set selectedRange to the user's selected range
+    Set selectedRange = Selection
+    
+    ' Loop through each cell in the selected range
+    For Each cell In selectedRange
+        ' Check if the cell contains a hyperlink
+        If cell.Hyperlinks.Count > 0 Then
+            ' Get the URL of the first hyperlink in the cell
+            hyperlinkAddress = cell.Hyperlinks(1).Address
+            ' Write the URL to the adjacent cell in the next column
+            cell.Offset(0, 1).Value = hyperlinkAddress
+        End If
+    Next cell
+End Sub
