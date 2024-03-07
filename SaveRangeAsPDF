@@ -1,0 +1,15 @@
+Sub SaveRangeAsPDF()
+    Dim pdfFileName As String
+    Dim selectedRange As Range
+    
+    ' Define the folder to save the PDF
+    pdfFileName = "C:\YourFolder\SelectedRange.pdf"
+    
+    ' Get the selected range
+    Set selectedRange = Selection
+    
+    ' Export the selected range as PDF
+    selectedRange.ExportAsFixedFormat Type:=xlTypePDF, Filename:=pdfFileName, _
+                                       Quality:=xlQualityStandard, IncludeDocProperties:=True, _
+                                       IgnorePrintAreas:=False, OpenAfterPublish:=False
+End Sub
