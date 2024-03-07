@@ -1,0 +1,21 @@
+Sub ReplaceBlanksWithNA()
+    Dim ws As Worksheet
+    Dim selectedRange As Range
+    Dim cell As Range
+    Dim replaceText As String
+    
+    ' Set the text you want to replace blank cells with
+    replaceText = "NA"
+    
+    ' Set a reference to the active worksheet and selected range
+    Set ws = ActiveSheet
+    Set selectedRange = Selection
+    
+    ' Loop through each cell in the selected range
+    For Each cell In selectedRange
+        ' If the cell is empty, set its value to "NA"
+        If IsEmpty(cell.Value) Then
+            cell.Value = replaceText
+        End If
+    Next cell
+End Sub
